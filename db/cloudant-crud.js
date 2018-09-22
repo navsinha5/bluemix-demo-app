@@ -42,7 +42,7 @@ const insertEquipment = function(equipment, callback){
             return;
         }
         console.log(body);
-        callback('record already exits');
+        callback('record already exists');
     });
 }
 

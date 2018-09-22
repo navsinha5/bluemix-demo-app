@@ -1,0 +1,5 @@
+---
+applications:
+ - name: demo-webapp
+   random-route: true
+   memory: 256M

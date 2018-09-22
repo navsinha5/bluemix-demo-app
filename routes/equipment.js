@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const dbOps = require('../db/cloudant-crud');
+const htmlBuilder = require('../config/html-string');
 
 
 router.get('/equipment/search', (req, res, next) => {
@@ -12,7 +13,9 @@ router.get('/equipment/search', (req, res, next) => {
             next(err);
             return;
         }
-        res.json(body.rows);
+        //res.json(body.rows);
+        res.type('html');
+        res.send(htmlBuilder(body.rows));
     });
 });
 
@@ -21,12 +24,14 @@ router.get('/equipment/:equipmentNum', (req, res, next) => {
         next('equipment number not mentioned');
         return;
     }
-    dbOps.findEquipment(req.params.equipmentNum, (err, data) =>{
+    dbOps.findEquipment(parseInt(req.params.equipmentNum), (err, data) =>{
         if(err){
             next(err);
             return;
         }
-        res.json(data);
+        //res.json(data);
+        res.type('html');
+        res.send(htmlBuilder(data.docs));
     });
 
 });
